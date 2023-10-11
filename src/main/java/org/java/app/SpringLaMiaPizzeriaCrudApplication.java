@@ -1,7 +1,11 @@
 package org.java.app;
 
+import java.time.LocalDate;
+
 import org.java.app.db.pojo.Pizza;
+import org.java.app.db.pojo.SpecialOffer;
 import org.java.app.db.serv.PizzaService;
+import org.java.app.db.serv.SpecialOfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -16,6 +20,10 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner{
 
 	@Autowired
 	private PizzaService pizzaService;
+
+	// importazione del file service nel file Application
+	@Autowired
+	private SpecialOfferService specialOfferService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringLaMiaPizzeriaCrudApplication.class, args);
@@ -33,6 +41,17 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner{
 		pizzaService.save(diavola);
 		
 		System.out.println("\n\nDati inseriti nella tabella del database\n\n");
+	
+		// oggetti SpecialOffer da inserire nel db
+		SpecialOffer specialOffer1 = new SpecialOffer(0, "Offerta Speciale 1", LocalDate.now(), LocalDate.parse("2023-10-23"), margherita);
+		SpecialOffer specialOffer2 = new SpecialOffer(0, "Offerta Speciale 2", LocalDate.now(), LocalDate.parse("2024-03-27"), cotto);
+		SpecialOffer specialOffer3 = new SpecialOffer(0, "Offerta Speciale 3", LocalDate.now(), LocalDate.parse("2024-08-15"), diavola);
+		SpecialOffer specialOffer4 = new SpecialOffer(0, "Offerta Speciale 4", LocalDate.now(), LocalDate.parse("2023-10-26"), margherita);
+
+		specialOfferService.save(specialOffer1);
+		specialOfferService.save(specialOffer2);
+		specialOfferService.save(specialOffer3);
+		specialOfferService.save(specialOffer4);
 	}
 
 }
