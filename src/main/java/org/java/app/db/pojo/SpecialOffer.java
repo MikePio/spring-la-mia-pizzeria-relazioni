@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
@@ -25,13 +26,19 @@ public class SpecialOffer {
   @Column(nullable = false)
   private LocalDate endDate;
 
+  // * @ManyToOne
+  @ManyToOne // * per ogni offerta speciale esiste una sola pizza
+  @JoinColumn(nullable = false) // * un'offerta speciale non può esistere senza una pizza
+  private Pizza pizza;
+
   public SpecialOffer() {}
 
-  public SpecialOffer(int id, String title, LocalDate startDate, LocalDate endDate) {
+  public SpecialOffer(int id, String title, LocalDate startDate, LocalDate endDate, Pizza pizza) {
 		
     setTitle(title);
 		setStartDate(startDate);
 		setEndDate(endDate);
+    setPizza(pizza);
   }
 
   public int getId() {
@@ -64,6 +71,14 @@ public class SpecialOffer {
 
   public void setEndDate(LocalDate endDate) {
     this.endDate = endDate;
+  }
+
+  public Pizza getPizza() {
+    return pizza;
+  }
+
+  public void setPizza(Pizza pizza) {
+    this.pizza = pizza;
   }
 
   @Override

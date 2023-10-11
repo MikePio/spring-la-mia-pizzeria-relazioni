@@ -1,5 +1,7 @@
 package org.java.app.db.pojo;
 
+import java.util.List;
+
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.Range;
 
@@ -8,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Digits;
@@ -40,6 +43,10 @@ public class Pizza {
   // @DecimalMax(value = "1000.00", message = "\nThe price must be at most €1000")
   private float price;
   
+  // * @OneToMany
+  @OneToMany(mappedBy = "pizza") // * mappedBy fa l'inverso di ciò che è stato fatto nel @ManyToOne per quanto riguarda i collegamenti/le relazioni tra le tabelle
+	private List<SpecialOffer> specialOffers;
+
   // costruttore
   public Pizza() { }
 	public Pizza(String name, String description, String photo, float price) {
