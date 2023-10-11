@@ -1,4 +1,4 @@
-`spring-la-mia-pizzeria-relazioni`
+# `spring-la-mia-pizzeria-relazioni`
 
 ## Continuazione esercizio
 Questo esercizio è la continuazione della repo `spring-la-mia-pizzeria-crud` 
