@@ -1,0 +1,44 @@
+<!-- head -->
+<th:block th:replace="../templates/frags/head :: head"></th:block>
+
+<body th:object="${pizza}" class="d-flex flex-column justify-content-between">
+
+	<!-- header -->
+	<th:block th:replace="../templates/frags/header :: header"></th:block>
+
+	<main class="py-5 d-flex flex-column justify-content-center align-items-center text-center">
+		<div class="d-flex align-items-center">
+			<h2 class="mb-2 me-2">[[*{name}]]</h2> 
+			<a th:href="@{/pizzas/update/{id}(id=*{id})}" class="btn-nav btn btn-warning fw-custom text-white def-link d-flex align-items-center justify-content-center mb-2 me-2">Edit</a>
+			<!-- * DELETE - (ULTIMO) STEP 3 - creare il form per l'eliminazione -->
+			<form th:action="@{/pizzas/delete/{id}(id=*{id})}" method="POST" class="d-inline mb-2" onsubmit="return confirm('Confirm deletion of this pizza?')">
+				<!-- * aggiungere DELETE come value -->
+				<button type="submit" value="DELETE" class="btn-nav btn btn-danger fw-custom d-flex align-items-center justify-content-center" title="delete-btn">Delete</button>
+				<!-- <button type="submit" value="DELETE" class="btn-nav btn btn-danger fw-custom d-flex align-items-center justify-content-center" title="delete-btn"><i class="fa-solid fa-trash"></i></button> -->
+			</form>
+		</div>
+
+		<!-- * soluzione 1 per mostrare le immagini-->
+		<img alt="" th:src="@{/img/__${pizza.photo}__}" th:alt="${pizza.photo}" class="img-show-page my-2 rounded">
+		<!-- * soluzione 2 per mostrare le immagini-->
+		<!-- <img th:src="@{/img/{photo}(photo=${pizza.photo})}" th:alt="${pizza.photo}" class="my-2 w-50"> -->
+		
+		<h5 class="mt-2 mb-3">Ingredienti: [[*{description}]]</h5>
+		<h4>Prezzo: € [[${pizza.formattedPrice}]]</h4>
+		
+	</main>
+	
+	<!-- link di tutte le pagine -->
+	<!-- soluzione 1 -->
+	<th:block th:replace="../templates/frags/links :: links"></th:block>
+	<!-- soluzione 2 -->
+	<!-- <th:block th:replace="~{../templates/frags/links :: links}"></th:block> -->
+	<!-- soluzione 3 -->
+	<!-- <th:block th:replace="~{frags/links :: links}"></th:block> -->
+
+	<!-- footer -->
+	<th:block th:replace="../templates/frags/footer :: footer"></th:block>
+
+</body>
+
+</html>
