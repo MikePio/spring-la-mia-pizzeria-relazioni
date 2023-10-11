@@ -101,7 +101,16 @@ public class Pizza {
 	public String getFormattedPrice() {
 		return String.format("%.2f", price);
 	}
-
+  
+  // * getter e setter di SpecialOffer (da importare se si vuole ciclare gli ogetti SpecialOffer all'interno dell'oggetto pizza)
+  public List<SpecialOffer> getSpecialOffers() {
+    return specialOffers;
+  }
+  
+  public void setSpecialOffers(List<SpecialOffer> specialOffers) {
+    this.specialOffers = specialOffers;
+  }
+  
   @Override
   public String toString() {
 		return "Id: " + getId() + "\n" + "Name: " + getName() + "\n" + "Description: " + getDescription() + "\n" + "Image path: " + getPhoto() + "\n" + "Price: " + getPrice() + " ----> Formatted Price: " + getFormattedPrice() + "\n";

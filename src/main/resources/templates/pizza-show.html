@@ -25,7 +25,15 @@
 		
 		<h5 class="mt-2 mb-3">Ingredienti: [[*{description}]]</h5>
 		<h4>Prezzo: € [[${pizza.formattedPrice}]]</h4>
-		
+
+		<!-- Offerte speciali -->
+		<div th:if="*{specialOffers.size() < 1}" class="my-1">
+			<b>Nessuna offerta disponibile</b>
+		</div>
+		<ul th:if="*{specialOffers.size() > 0}" class="list-unstyled mt-2">
+			<li th:each="specialOffer : *{specialOffers}" th:object="${specialOffer}" class="my-1"><span>[[*{title}]]</span>: disponibile dal [[*{startDate}]] fino al [[*{endDate}]]</li>
+		</ul>
+
 	</main>
 	
 	<!-- link di tutte le pagine -->
