@@ -1,6 +1,7 @@
 package org.java.app.db.pojo;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import org.aspectj.lang.annotation.After;
 
@@ -87,6 +88,16 @@ public class SpecialOffer {
 
   public void setEndDate(LocalDate endDate) {
     this.endDate = endDate;
+  }
+
+  public String getFormattedStartDate() {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    return startDate.format(formatter);
+  }
+
+  public String getFormattedEndDate() {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    return endDate.format(formatter);
   }
 
   // * STEP 1 - validazione della end date che deve essere dopo la start date

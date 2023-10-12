@@ -1,17 +1,17 @@
 <!-- head -->
-<th:block th:replace="../templates/frags/head :: head"></th:block>
+<th:block th:replace="~{/frags/head :: head}"></th:block>
 
 <body class="d-flex flex-column justify-content-between">
 
 	<!-- header -->
-	<th:block th:replace="../templates/frags/header :: header"></th:block>
+	<th:block th:replace="~{/frags/header :: header}"></th:block>
 
 	<main class="py-5 d-flex flex-column justify-content-center align-items-center">
 
-		<h1 class="mb-4">Pizzas</h1>
+		<h1 class="mb-4">Pizza Menu</h1>
 
 		<h2 th:if="${pizzas.size() == 0}">
-			Non ci sono pizze...
+			No pizza found...
 		</h2>
 
 		<!-- <ul>
@@ -69,14 +69,14 @@
 
 	<!-- link di tutte le pagine -->
 	<!-- soluzione 1 -->
-	<th:block th:replace="../templates/frags/links :: links"></th:block>
+	<!-- <th:block th:replace="../templates/frags/links :: links"></th:block> -->
 	<!-- soluzione 2 -->
 	<!-- <th:block th:replace="~{../templates/frags/links :: links}"></th:block> -->
 	<!-- soluzione 3 -->
-	<!-- <th:block th:replace="~{frags/links :: links}"></th:block> -->
+	<th:block th:replace="~{frags/links :: links}"></th:block>
 
 	<!-- footer -->
-	<th:block th:replace="../templates/frags/footer :: footer"></th:block>
+	<th:block th:replace="~{/frags/footer :: footer}"></th:block>
 
 </body>
 

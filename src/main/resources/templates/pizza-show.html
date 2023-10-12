@@ -1,10 +1,10 @@
 <!-- head -->
-<th:block th:replace="../templates/frags/head :: head"></th:block>
+<th:block th:replace="~{/frags/head :: head}"></th:block>
 
 <body th:object="${pizza}" class="d-flex flex-column justify-content-between">
 
 	<!-- header -->
-	<th:block th:replace="../templates/frags/header :: header"></th:block>
+	<th:block th:replace="~{/frags/header :: header}"></th:block>
 
 	<main class="py-5 d-flex flex-column justify-content-center align-items-center text-center">
 		<div class="d-flex align-items-center">
@@ -23,29 +23,31 @@
 		<!-- * soluzione 2 per mostrare le immagini-->
 		<!-- <img th:src="@{/img/{photo}(photo=${pizza.photo})}" th:alt="${pizza.photo}" class="my-2 w-50"> -->
 		
-		<h5 class="mt-2 mb-3">Ingredienti: [[*{description}]]</h5>
-		<h4>Prezzo: € [[${pizza.formattedPrice}]]</h4>
+		<h5 class="mt-2 mb-3"><span>Description:</span> [[*{description}]]</h5>
+		<h4><span>Price:</span> € [[*{formattedPrice}]]</h4>
+		<!-- oppure -->
+		<!-- <h4><span>Price:</span> € [[${pizza.formattedPrice}]]</h4> -->
 
 		<!-- Offerte speciali -->
 		<div th:if="*{specialOffers.size() < 1}" class="my-1">
-			<b>Nessuna offerta disponibile</b>
+			<b>No offers available</b>
 		</div>
 		<ul th:if="*{specialOffers.size() > 0}" class="list-unstyled mt-2">
-			<li th:each="specialOffer : *{specialOffers}" th:object="${specialOffer}" class="my-1"><span>[[*{title}]]</span>: disponibile dal [[*{startDate}]] fino al [[*{endDate}]]</li>
+			<li th:each="specialOffer : *{specialOffers}" th:object="${specialOffer}" class="my-1"><span class="fw-custom">[[*{title}]]:</span> disponibile da 00:00 del [[*{getFormattedStartDate}]] fino a 00:00 del [[*{getFormattedEndDate}]]</li>
 		</ul>
 
 	</main>
 	
 	<!-- link di tutte le pagine -->
 	<!-- soluzione 1 -->
-	<th:block th:replace="../templates/frags/links :: links"></th:block>
+	<!-- <th:block th:replace="~{templates/frags/links :: links"></th:block> -->
 	<!-- soluzione 2 -->
-	<!-- <th:block th:replace="~{../templates/frags/links :: links}"></th:block> -->
+	<!-- <th:block th:replace="~{~{templates/frags/links :: links}"></th:block> -->
 	<!-- soluzione 3 -->
-	<!-- <th:block th:replace="~{frags/links :: links}"></th:block> -->
+	<th:block th:replace="~{frags/links :: links}"></th:block>
 
 	<!-- footer -->
-	<th:block th:replace="../templates/frags/footer :: footer"></th:block>
+	<th:block th:replace="~{/frags/footer :: footer}"></th:block>
 
 </body>
 
