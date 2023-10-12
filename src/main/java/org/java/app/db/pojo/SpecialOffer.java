@@ -2,6 +2,8 @@ package org.java.app.db.pojo;
 
 import java.time.LocalDate;
 
+import org.aspectj.lang.annotation.After;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,7 +11,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.AssertTrue;
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PastOrPresent;
 
 @Entity
 public class SpecialOffer {
@@ -19,12 +26,20 @@ public class SpecialOffer {
   private int id;
   
   @Column(nullable = false)
+  @NotBlank(message = "\nEnter the name of the offer")
   private String title;
   
   @Column(nullable = false)
+  @NotNull(message = "\nEnter the start date of the offer")
+  // @PastOrPresent(message = "The start date must be today or in the past")
+  // @Future(message = "Start date must be in the future")
+  @FutureOrPresent(message = "The start date must be today or in the future")
   private LocalDate startDate; 
   
   @Column(nullable = false)
+  @NotNull(message = "\nEnter the end date of the offer")
+  @Future(message = "End date must be in the future")
+  // @After(property = "startDate", message = "The end date must be after the start date", value = "")
   private LocalDate endDate;
 
   // * @ManyToOne
@@ -72,6 +87,17 @@ public class SpecialOffer {
 
   public void setEndDate(LocalDate endDate) {
     this.endDate = endDate;
+  }
+
+  // * STEP 1 - validazione della end date che deve essere dopo la start date
+  public int isEndDateAfterStartDate() {
+    // controllo se startDate ed endDate sono nulli
+    if (startDate == null || endDate == null) {
+      return 0;
+    }else if(endDate.isAfter(startDate)){
+      return 1;
+    }
+    return 2;
   }
 
   public Pizza getPizza() {

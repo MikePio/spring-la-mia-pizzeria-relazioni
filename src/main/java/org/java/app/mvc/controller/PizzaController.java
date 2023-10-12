@@ -209,10 +209,25 @@ public class PizzaController {
   }
   // * soluzione 1 (migliore) per creare una nuova offerta
   @PostMapping("/pizzas/special-offer/{pizza_id}")
-  public String storeSpecialOffer(@Valid @ModelAttribute SpecialOffer specialOffer, @PathVariable("pizza_id") int id, Model model){
+  public String storeSpecialOffer(@Valid @ModelAttribute SpecialOffer specialOffer, BindingResult bindingResult, @PathVariable("pizza_id") int id, Model model){
 
     Pizza pizza = pizzaService.findById(id);
-    
+
+    // * STEP 2 - validazione della end date che deve essere dopo la start date
+    if(specialOffer.isEndDateAfterStartDate() == 2){
+      model.addAttribute("endDateBeforeStartDate", true);
+      return "special-offer-form";
+    }
+
+    // Validazione e stampa errori
+    if(bindingResult.hasErrors()){
+      System.out.println("Error: ");
+      bindingResult.getAllErrors().forEach(System.out::println);
+      return "special-offer-form";
+    }else{
+      System.out.println("No error\n");
+    }
+
     // es. se si vuole inserire in modo automatico la data di oggi
     // specialOffer.setStartDate(LocalDate.now());
     specialOffer.setPizza(pizza);
@@ -220,6 +235,8 @@ public class PizzaController {
     // * soluzione 2 per creare una nuova offerta (accrocchio nel caso la soluzione 1 non funzionasse cioè non viene impostato pizza_id anche nel @PostMapping) -> imposto un id = 0 così da far generare l'id automaticamente a SQL
     // specialOffer.setId(0);
     // * soluzione 3 per creare una nuova offerta (accrocchio nel caso la soluzione 1 non funzionasse cioè non viene impostato pizza_id anche nel @PostMapping) -> utilizzo un input hidden nel form/create e lo imposto con value 0 così da avere un id = 0 e da far generare l'id automaticamente a SQL
+
+    // System.out.println("\nAdded new specialOffer:\n" + specialOffer);
 
     // salva nel db l'oggetto specialOffer
     specialOfferService.save(specialOffer);
