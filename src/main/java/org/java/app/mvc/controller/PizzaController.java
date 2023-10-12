@@ -1,9 +1,12 @@
 package org.java.app.mvc.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.java.app.db.pojo.Pizza;
+import org.java.app.db.pojo.SpecialOffer;
 import org.java.app.db.serv.PizzaService;
+import org.java.app.db.serv.SpecialOfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomNumberEditor;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -31,6 +34,9 @@ public class PizzaController {
 
   @Autowired
   private PizzaService pizzaService;
+
+  @Autowired
+  private SpecialOfferService specialOfferService;
 
   // @GetMapping("/")
   @GetMapping
@@ -187,5 +193,38 @@ public class PizzaController {
 		
 		return "redirect:/pizzas";
 	}
+
+  // * OFFERTE SPECIALI (specialOffers)
+  // * CREATE
+  @GetMapping("/pizzas/special-offer/{pizza_id}")
+  public String specialOffer(@PathVariable("pizza_id") int id, Model model){
+    
+    Pizza pizza = pizzaService.findById(id);
+		SpecialOffer specialOffer = new SpecialOffer();
+
+		model.addAttribute("pizza", pizza);
+		model.addAttribute("specialOffer", specialOffer);
+
+    return "special-offer-form";
+  }
+  // * soluzione 1 (migliore) per creare una nuova offerta
+  @PostMapping("/pizzas/special-offer/{pizza_id}")
+  public String storeSpecialOffer(@Valid @ModelAttribute SpecialOffer specialOffer, @PathVariable("pizza_id") int id, Model model){
+
+    Pizza pizza = pizzaService.findById(id);
+    
+    // es. se si vuole inserire in modo automatico la data di oggi
+    // specialOffer.setStartDate(LocalDate.now());
+    specialOffer.setPizza(pizza);
+
+    // * soluzione 2 per creare una nuova offerta (accrocchio nel caso la soluzione 1 non funzionasse cioè non viene impostato pizza_id anche nel @PostMapping) -> imposto un id = 0 così da far generare l'id automaticamente a SQL
+    // specialOffer.setId(0);
+    // * soluzione 3 per creare una nuova offerta (accrocchio nel caso la soluzione 1 non funzionasse cioè non viene impostato pizza_id anche nel @PostMapping) -> utilizzo un input hidden nel form/create e lo imposto con value 0 così da avere un id = 0 e da far generare l'id automaticamente a SQL
+
+    // salva nel db l'oggetto specialOffer
+    specialOfferService.save(specialOffer);
+
+    return "redirect:/pizzas/" + id;
+  }
 
 }

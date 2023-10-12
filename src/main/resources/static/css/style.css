@@ -79,6 +79,11 @@ main img{
   .img-show-page {
     width: 50% !important;
   }
+
+  .card .btn-nav{
+    min-width: 1px !important;
+    font-size: 0.65rem;
+  }
 }
 
 @media (max-width: 426px) {
