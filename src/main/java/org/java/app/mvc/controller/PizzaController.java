@@ -1,6 +1,7 @@
 package org.java.app.mvc.controller;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import org.java.app.db.pojo.Pizza;
@@ -243,17 +244,60 @@ public class PizzaController {
 
     return "redirect:/pizzas/" + id;
   }
-  // DELETE per le offerte speciali
+  // * DELETE per le offerte speciali
   @PostMapping("/pizzas/special-offer/delete/{pizza_id}")
   public String deleteSpecialOffer(@PathVariable("pizza_id") int id) {
 
     SpecialOffer specialOffer = specialOfferService.findById(id);
     Pizza pizza = specialOffer.getPizza();
     specialOfferService.delete(specialOffer);
-    
+
     System.out.println("Deleted Offer in Pizza id: " + id);
     
     return "redirect:/pizzas/" + pizza.getId();
   } 
+  // * EDIT per le offerte speciali
+  @GetMapping("/pizzas/special-offer/update/{pizza_id}")
+  public String getSpecialOfferEditForm(@PathVariable("pizza_id") int id, Model model) {
 
+    SpecialOffer specialOffer = specialOfferService.findById(id);
+    Pizza pizza = specialOffer.getPizza();
+
+    model.addAttribute("specialOffer", specialOffer);
+    model.addAttribute("pizza", pizza);
+
+    return "special-offer-edit";
+  }
+  @PostMapping("/pizzas/special-offer/update/{pizza_id}")
+  public String updateSpecialOffer(@Valid @ModelAttribute SpecialOffer specialOffer, BindingResult bindingResult, @PathVariable("pizza_id") int id, Model model){
+
+    // System.out.println("\nUpdate special offer:\n" + specialOffer);
+
+		SpecialOffer oldSpecialOffer = specialOfferService.findById(id);
+		Pizza pizza = oldSpecialOffer.getPizza();
+
+		specialOffer.setId(id);
+		specialOffer.setPizza(pizza);
+
+    // * STEP 2 - validazione della end date che deve essere dopo la start date
+    if(specialOffer.isEndDateAfterStartDate() == 2){
+      model.addAttribute("endDateBeforeStartDate", true);
+      return "special-offer-form";
+    }
+
+    // Validazione e stampa errori per l'edit
+    if(bindingResult.hasErrors()){
+      System.out.println("Error: ");
+      bindingResult.getAllErrors().forEach(System.out::println);
+
+      return "special-offer-edit";
+    }else{
+      System.out.println("No error\n");
+    }
+
+    specialOfferService.save(specialOffer);
+    
+    // Pizza pizza = specialOffer.getPizza();	
+    return "redirect:/pizzas/" + pizza.getId();
+  }
 }

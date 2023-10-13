@@ -111,6 +111,30 @@ public class SpecialOffer {
     return 2;
   }
 
+  // * STEP 1/3 - ottenere la data startDate salvata nel db e mostrarla nell'input dell'edit di specialOffer
+  public String getHtmlStartDate() {
+    
+    return getStartDate() == null ? null : getStartDate().format(DateTimeFormatter.ofPattern("YYYY-MM-dd"));
+	}
+  
+  // * STEP 2/3 - ottenere la data startDate salvata nel db e mostrarla nell'input dell'edit di specialOffer
+	public void setHtmlStartDate(String startDate) {
+
+		setStartDate(LocalDate.parse(startDate));
+	}
+  
+  // * STEP 1/3 - ottenere la data endDate salvata nel db e mostrarla nell'input dell'edit di specialOffer
+  public String getHtmlEndDate() {
+    
+    return getEndDate() == null ? null : getEndDate().format(DateTimeFormatter.ofPattern("YYYY-MM-dd"));
+	}
+  
+  // * STEP 2/3 - ottenere la data endDate salvata nel db e mostrarla nell'input dell'edit di specialOffer
+	public void setHtmlEndDate(String endDate) {
+
+		setEndDate(LocalDate.parse(endDate));
+	}
+
   public Pizza getPizza() {
     return pizza;
   }
