@@ -121,7 +121,7 @@ public class SpecialOffer {
 
   @Override
   public String toString() {
-    return "SpecialOffer:\nid=" + id + "\ntitle=" + title + "\nstartDate=" + startDate + "\nendDate=" + endDate;
+    return "\nSpecialOffer:\nid=" + id + "\ntitle=" + title + "\nstartDate=" + startDate + "\nendDate=" + endDate;
   }
 
   

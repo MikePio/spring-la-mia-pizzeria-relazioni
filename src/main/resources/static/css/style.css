@@ -38,6 +38,12 @@ header a, .def-link {
   height: 30px;
 }
 
+.btn-icon{
+  width: 30px;
+  height: 30px;
+  font-size: 15px;
+}
+
 /* main */
 main{
   /* 100vh - altezza nav-bar - altezza footer */

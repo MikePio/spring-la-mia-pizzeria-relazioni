@@ -236,12 +236,24 @@ public class PizzaController {
     // specialOffer.setId(0);
     // * soluzione 3 per creare una nuova offerta (accrocchio nel caso la soluzione 1 non funzionasse cioè non viene impostato pizza_id anche nel @PostMapping) -> utilizzo un input hidden nel form/create e lo imposto con value 0 così da avere un id = 0 e da far generare l'id automaticamente a SQL
 
-    // System.out.println("\nAdded new specialOffer:\n" + specialOffer);
+    System.out.println("\nAdded new specialOffer:\n" + specialOffer);
 
     // salva nel db l'oggetto specialOffer
     specialOfferService.save(specialOffer);
 
     return "redirect:/pizzas/" + id;
   }
+  // DELETE per le offerte speciali
+  @PostMapping("/pizzas/special-offer/delete/{pizza_id}")
+  public String deleteSpecialOffer(@PathVariable("pizza_id") int id) {
+
+    SpecialOffer specialOffer = specialOfferService.findById(id);
+    Pizza pizza = specialOffer.getPizza();
+    specialOfferService.delete(specialOffer);
+    
+    System.out.println("Deleted Offer in Pizza id: " + id);
+    
+    return "redirect:/pizzas/" + pizza.getId();
+  } 
 
 }
