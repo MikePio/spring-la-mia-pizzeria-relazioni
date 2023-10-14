@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
@@ -46,6 +47,10 @@ public class Pizza {
   // * @OneToMany
   @OneToMany(mappedBy = "pizza") // * mappedBy fa l'inverso di ciò che è stato fatto nel @ManyToOne per quanto riguarda i collegamenti/le relazioni tra le tabelle
 	private List<SpecialOffer> specialOffers;
+
+  // * RELAZIONE MANY-TO-MANY / N-N - STEP 2.1/2.2 - COLLEGAMENTO DELLE TABELLE in Pizza.java e poi in Ingredient.java
+  @ManyToMany
+  private List<Ingredient> ingredients;
 
   // costruttore
   public Pizza() { }

@@ -1,10 +1,13 @@
 package org.java.app.db.pojo;
 
+import java.util.List;
+
 import jakarta.annotation.Generated;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 
 // * RELAZIONE MANY-TO-MANY / N-N - STEP 1 - CREAZIONE TABELLA NEL DB
 @Entity
@@ -13,6 +16,10 @@ public class Ingredient {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
+
+  // * RELAZIONE MANY-TO-MANY / N-N - STEP 2.2/2.2 - COLLEGAMENTO DELLE TABELLE in Pizza.java e poi in Ingredient.java
+  @ManyToMany(mappedBy = "ingredients")
+  private List<Pizza> pizzas;
 
   private String name;
 
