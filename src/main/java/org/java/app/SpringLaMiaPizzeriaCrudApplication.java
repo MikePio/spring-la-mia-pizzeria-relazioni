@@ -2,8 +2,10 @@ package org.java.app;
 
 import java.time.LocalDate;
 
+import org.java.app.db.pojo.Ingredient;
 import org.java.app.db.pojo.Pizza;
 import org.java.app.db.pojo.SpecialOffer;
+import org.java.app.db.serv.IngredientService;
 import org.java.app.db.serv.PizzaService;
 import org.java.app.db.serv.SpecialOfferService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,10 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner{
 	// importazione del file service nel file Application
 	@Autowired
 	private SpecialOfferService specialOfferService;
+	
+	// * RELAZIONE MANY-TO-MANY / N-N - STEP 3.3 - INSERIRE DATI NEL DB --> importazione del file service nel file Application
+	@Autowired
+	private IngredientService ingredientService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringLaMiaPizzeriaCrudApplication.class, args);
@@ -32,6 +38,18 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
+		// * RELAZIONE MANY-TO-MANY / N-N - STEP 3.4 - INSERIRE DATI NEL DB --> CREARE gli elementi da inserire nel db
+		Ingredient pomodoro = new Ingredient("pomodoro");
+		Ingredient mozzarella = new Ingredient("mozzarella");
+		Ingredient prosciuttoCotto = new Ingredient("prosciutto cotto");
+		Ingredient salamePiccante = new Ingredient("salame piccante");
+		
+		// * RELAZIONE MANY-TO-MANY / N-N - STEP 3.4 - INSERIRE DATI NEL DB --> SALVARE gli elementi da inserire nel db
+		ingredientService.save(pomodoro);
+		ingredientService.save(mozzarella);
+		ingredientService.save(prosciuttoCotto);
+		ingredientService.save(salamePiccante);
+
 		Pizza margherita = new Pizza("Margherita", "Pomodoro e mozzarella", "margherita.jpg", 5.00f);
 		Pizza cotto = new Pizza("Prosciutto Cotto", "Pomodoro, mozzarella e prosciutto cotto", "cotto.jpg", 6.50f);
 		Pizza diavola = new Pizza("Diavola", "Pomodoro, mozzarella e salame piccante", "diavola.jpg", 7.00f);
