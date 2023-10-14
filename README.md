@@ -7,6 +7,7 @@ Questo esercizio è la continuazione della repo `spring-la-mia-pizzeria-crud`
 > In fondo al README di questa repo c'è il README della repo precedente
 
 # Day 1
+### 11/10/23
 ## Todo
 > ATTENZIONE!!!
 >
@@ -30,7 +31,8 @@ La pagina di dettaglio della *singola pizza* mostrerà *l’elenco delle offerte
 
 Accanto ad ogni offerta speciale è previsto un bottone che mi porterà a una pagina per modificarla.
 
-# Day 2
+# Day 2 
+### 12/10/23
 ## Todo
 
 Ogni pizza può avere più **ingredienti**, e **ogni ingrediente può essere collegato a più pizze**.
