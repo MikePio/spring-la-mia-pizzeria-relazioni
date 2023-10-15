@@ -130,6 +130,12 @@ public class Pizza {
     this.ingredients = ingredients;
   }
   
+  // * FUNZIONE NECESSARIA PER ELIMINARE GLI INGREDIENTI(/ELEMENTI/OGGETTI)
+  public void deleteIngredient(Ingredient ingredient) {
+		
+		getIngredients().remove(ingredient);
+	}
+
   @Override
   public String toString() {
 		return "Id: " + getId() + "\n" + "Name: " + getName() + "\n" + "Description: " + getDescription() + "\n" + "Image path: " + getPhoto() + "\n" + "Price: " + getPrice() + " ----> Formatted Price: " + getFormattedPrice() + "\n";

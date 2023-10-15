@@ -13,15 +13,20 @@
     <!-- * RELAZIONE MANY-TO-MANY / N-N - STEP 5.2/5.2 - STAMPARE IN PAGINA GLI INGREDIENTI (/OGGETTI) --→ utilizzare un ciclo for each per stampare gli ingredienti -->
     <!-- tutti gli ingredienti -->
 		<ul class="list-unstyled m-0">
-			<li class="mb-2" th:each="ingredient : ${ingredients}" th:object="${ingredient}">
+			<li th:each="ingredient : ${ingredients}" th:object="${ingredient}" class="my-1 d-flex justify-content-between align-items-center">
         <!-- soluzione in lowercase -->
         <!-- [[*{name}]] -->
         <!-- soluzione 1 - funzione nameWithInitialCapital() inserita nel modello -->
-        [[*{nameWithInitialCapital}]]
+        <span class="fw-custom text-white me-2">[[*{nameWithInitialCapital}]]</span>
         <!-- soluzione 2 - funzione nameWithInitialCapital() inserita nel modello -->
         <!-- <span th:text="${ingredient.nameWithInitialCapital}"></span> -->
         <!-- soluzione diretta senza la funzione nameWithInitialCapital() inserita nel modello -->
         <!-- <span class="text-white" th:text="${ingredient.name.substring(0, 1).toUpperCase() + ingredient.name.substring(1)}"></span> -->
+        <!-- * DELETE -->
+        <form th:action="@{/ingredients/delete/{id}(id=*{id})}" method="POST" class="d-inline m-0" onsubmit="return confirm('Confirm deletion of this ingredient?')">
+          <!-- <button type="submit" value="DELETE" class="btn-nav btn btn-danger fw-custom d-flex align-items-center justify-content-center ms-2" title="Delete ingredient">Delete Ingredient</button> -->
+          <button type="submit" value="DELETE" class="btn-icon btn btn-danger fw-custom d-flex align-items-center justify-content-center " title="Delete ingredient"><i class="fa-solid fa-trash"></i></button>
+        </form>
       </li>
 		</ul>
 

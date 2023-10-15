@@ -70,5 +70,22 @@ public class Ingredient {
     return name.substring(0, 1).toUpperCase() + name.substring(1);
   }
 
+  // * METODO CHE RITORNA UN NUMERO INTERO CHE RAPPRESENTA UNIVOCAMENTE L'OGGETTO
+  @Override
+	public int hashCode() {
+		
+		return getId();
+	}
+
+  // * METODO CHE PRENDE IN INGRESSO UN OGGETTO E RITORNA UN VALORE BOOLEAN PER VERIFICARE SE L'OGGETTO IN INGRESSO è LO STESSO IN CUI MI TROVO 
+	@Override
+	public boolean equals(Object object) {
+		
+		if (!(object instanceof Ingredient)) return false;
+		
+		Ingredient objectIngredient = (Ingredient) object;
+		
+		return getId() == objectIngredient.getId();
+	}
 
 }
