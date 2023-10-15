@@ -27,7 +27,7 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner{
 	@Autowired
 	private SpecialOfferService specialOfferService;
 	
-	// * RELAZIONE MANY-TO-MANY / N-N - STEP 3.3 - INSERIRE DATI NEL DB --> importazione del file service nel file Application
+	// * RELAZIONE MANY-TO-MANY / N-N - STEP 3.3/3.5 - INSERIRE DATI NEL DB --> importazione del file service nel file Application
 	@Autowired
 	private IngredientService ingredientService;
 
@@ -38,13 +38,13 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		// * RELAZIONE MANY-TO-MANY / N-N - STEP 3.4 - INSERIRE DATI NEL DB --> CREARE gli elementi da inserire nel db
+		// * RELAZIONE MANY-TO-MANY / N-N - STEP 3.4/3.5 - INSERIRE DATI NEL DB --> CREARE gli elementi da inserire nel db
 		Ingredient pomodoro = new Ingredient("pomodoro");
 		Ingredient mozzarella = new Ingredient("mozzarella");
 		Ingredient prosciuttoCotto = new Ingredient("prosciutto cotto");
 		Ingredient salamePiccante = new Ingredient("salame piccante");
 		
-		// * RELAZIONE MANY-TO-MANY / N-N - STEP 3.4 - INSERIRE DATI NEL DB --> SALVARE gli elementi da inserire nel db
+		// * RELAZIONE MANY-TO-MANY / N-N - STEP 3.5/3.5 - INSERIRE DATI NEL DB --> SALVARE gli elementi da inserire nel db
 		ingredientService.save(pomodoro);
 		ingredientService.save(mozzarella);
 		ingredientService.save(prosciuttoCotto);
