@@ -46,6 +46,16 @@ public class Ingredient {
     this.name = name;
   }
 
+  // * RELAZIONE MANY-TO-MANY / N-N - STEP 4.1/4.5 - COLLEGARE GLI ID DELLE PIZZE CON GLI ID DEGLI INGREDIENTI NELLA TABELLA db_pizzeria_relationships DEL DB --> creare getter e setter di Pizza in Ingredient
+  // * getter e setter di Pizza 
+  public List<Pizza> getPizzas() {
+    return pizzas;
+  }
+
+  public void setPizzas(List<Pizza> pizzas) {
+    this.pizzas = pizzas;
+  }
+
   @Override
   public String toString() {
     return "\nIngredient: \nid=" + id + "\nname=" + getName();

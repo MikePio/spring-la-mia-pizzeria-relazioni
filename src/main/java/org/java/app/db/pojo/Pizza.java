@@ -1,5 +1,6 @@
 package org.java.app.db.pojo;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.hibernate.validator.constraints.Length;
@@ -54,13 +55,16 @@ public class Pizza {
 
   // costruttore
   public Pizza() { }
-	public Pizza(String name, String description, String photo, float price) {
+  // * RELAZIONE MANY-TO-MANY / N-N - STEP 4.3/4.5 - COLLEGARE GLI ID DELLE PIZZE CON GLI ID DEGLI INGREDIENTI NELLA TABELLA db_pizzeria_relationships DEL DB --> aggiungere Ingredient... ingredients al costruttore Pizza 
+	public Pizza(String name, String description, String photo, float price, Ingredient... ingredients) {
 
 		setId(id);
 		setName(name);
 		setDescription(description);
 		setPhoto(photo);
 		setPrice(price);
+    // * RELAZIONE MANY-TO-MANY / N-N - STEP 4.4/4.5 - COLLEGARE GLI ID DELLE PIZZE CON GLI ID DEGLI INGREDIENTI NELLA TABELLA db_pizzeria_relationships DEL DB --> aggiungere il setIngredients(Arrays.asList(ingredients)); al costruttore Pizza
+    setIngredients(Arrays.asList(ingredients));
 	}
 
   public int getId() {
@@ -114,6 +118,16 @@ public class Pizza {
   
   public void setSpecialOffers(List<SpecialOffer> specialOffers) {
     this.specialOffers = specialOffers;
+  }
+
+  // * RELAZIONE MANY-TO-MANY / N-N - STEP 4.2/4.5 - COLLEGARE GLI ID DELLE PIZZE CON GLI ID DEGLI INGREDIENTI NELLA TABELLA db_pizzeria_relationships DEL DB --> creare getter e setter di Ingredient in Pizza
+  // * getter e setter di Ingredient (da importare se si vuole ciclare gli ogetti Ingredient all'interno dell'oggetto pizza)
+  public List<Ingredient> getIngredients() {
+    return ingredients;
+  }
+
+  public void setIngredients(List<Ingredient> ingredients) {
+    this.ingredients = ingredients;
   }
   
   @Override

@@ -50,9 +50,10 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner{
 		ingredientService.save(prosciuttoCotto);
 		ingredientService.save(salamePiccante);
 
-		Pizza margherita = new Pizza("Margherita", "Pomodoro e mozzarella", "margherita.jpg", 5.00f);
-		Pizza cotto = new Pizza("Prosciutto Cotto", "Pomodoro, mozzarella e prosciutto cotto", "cotto.jpg", 6.50f);
-		Pizza diavola = new Pizza("Diavola", "Pomodoro, mozzarella e salame piccante", "diavola.jpg", 7.00f);
+    // * RELAZIONE MANY-TO-MANY / N-N - STEP 4.5/4.5 - COLLEGARE GLI ID DELLE PIZZE CON GLI ID DEGLI INGREDIENTI NELLA TABELLA db_pizzeria_relationships DEL DB --> aggiungere gli ingredienti(ogetti) creati alle pizze(oggetti)
+		Pizza margherita = new Pizza("Margherita", "Pomodoro e mozzarella", "margherita.jpg", 5.00f, pomodoro, mozzarella );
+		Pizza cotto = new Pizza("Prosciutto Cotto", "Pomodoro, mozzarella e prosciutto cotto", "cotto.jpg", 6.50f, pomodoro, mozzarella, prosciuttoCotto);
+		Pizza diavola = new Pizza("Diavola", "Pomodoro, mozzarella e salame piccante", "diavola.jpg", 7.00f, pomodoro, mozzarella, salamePiccante);
 	
 		pizzaService.save(margherita);
 		pizzaService.save(cotto);
