@@ -61,7 +61,10 @@ public class Ingredient {
     return "\nIngredient: \nid=" + id + "\nname=" + getName();
   }
 
-  
+  // stampa il nome con solo la prima lettera in maiuscolo
+  public String getNameWithInitialCapital() {
+    return name.substring(0, 1).toUpperCase() + name.substring(1);
+  }
 
 
 }

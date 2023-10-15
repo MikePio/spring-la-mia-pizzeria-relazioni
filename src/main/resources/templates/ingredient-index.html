@@ -1,0 +1,43 @@
+<!-- head -->
+<th:block th:replace="~{/frags/head :: head}"></th:block>
+
+<body class="d-flex flex-column justify-content-between">
+
+	<!-- header -->
+	<th:block th:replace="~{/frags/header :: header}"></th:block>
+
+	<main class="py-5 d-flex flex-column justify-content-center align-items-center">
+
+		<h1 class="mb-4">Ingredients</h1>
+    
+    <!-- * RELAZIONE MANY-TO-MANY / N-N - STEP 5.2/5.2 - STAMPARE IN PAGINA GLI INGREDIENTI (/OGGETTI) --→ utilizzare un ciclo for each per stampare gli ingredienti -->
+    <!-- tutti gli ingredienti -->
+		<ul class="list-unstyled">
+			<li class="mb-2" th:each="ingredient : ${ingredients}" th:object="${ingredient}">
+        <!-- soluzione in lowercase -->
+        <!-- [[*{name}]] -->
+        <!-- soluzione 1 - funzione nameWithInitialCapital() inserita nel modello -->
+        [[*{nameWithInitialCapital}]]
+        <!-- soluzione 2 - funzione nameWithInitialCapital() inserita nel modello -->
+        <!-- <span th:text="${ingredient.nameWithInitialCapital}"></span> -->
+        <!-- soluzione diretta senza la funzione nameWithInitialCapital() inserita nel modello -->
+        <!-- <span class="text-white" th:text="${ingredient.name.substring(0, 1).toUpperCase() + ingredient.name.substring(1)}"></span> -->
+      </li>
+		</ul>
+
+	</main>
+
+	<!-- link di tutte le pagine -->
+	<!-- soluzione 1 -->
+	<!-- <th:block th:replace="../templates/frags/links :: links"></th:block> -->
+	<!-- soluzione 2 -->
+	<!-- <th:block th:replace="~{../templates/frags/links :: links}"></th:block> -->
+	<!-- soluzione 3 -->
+	<th:block th:replace="~{frags/links :: links}"></th:block>
+
+	<!-- footer -->
+	<th:block th:replace="~{/frags/footer :: footer}"></th:block>
+
+</body>
+
+</html>
