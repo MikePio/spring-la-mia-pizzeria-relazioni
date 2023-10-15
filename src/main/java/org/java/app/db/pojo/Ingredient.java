@@ -2,7 +2,10 @@ package org.java.app.db.pojo;
 
 import java.util.List;
 
+import org.hibernate.validator.constraints.Length;
+
 import jakarta.annotation.Generated;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,6 +24,7 @@ public class Ingredient {
   @ManyToMany(mappedBy = "ingredients")
   private List<Pizza> pizzas;
 
+  @Length(min = 2, max = 128, message = "\nThe length must be between 2 and 128 characters" )
   private String name;
 
   public Ingredient(){}

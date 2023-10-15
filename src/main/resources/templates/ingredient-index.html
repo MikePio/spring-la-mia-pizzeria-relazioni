@@ -12,7 +12,7 @@
     
     <!-- * RELAZIONE MANY-TO-MANY / N-N - STEP 5.2/5.2 - STAMPARE IN PAGINA GLI INGREDIENTI (/OGGETTI) --→ utilizzare un ciclo for each per stampare gli ingredienti -->
     <!-- tutti gli ingredienti -->
-		<ul class="list-unstyled">
+		<ul class="list-unstyled m-0">
 			<li class="mb-2" th:each="ingredient : ${ingredients}" th:object="${ingredient}">
         <!-- soluzione in lowercase -->
         <!-- [[*{name}]] -->
@@ -24,6 +24,10 @@
         <!-- <span class="text-white" th:text="${ingredient.name.substring(0, 1).toUpperCase() + ingredient.name.substring(1)}"></span> -->
       </li>
 		</ul>
+
+    <div class="mt-3 d-flex align-items-center justify-content-center">
+      <a href="/ingredients-create" class="btn btn-primary d-flex align-items-center justify-content-center">Add A New Ingredient</a>
+    </div>
 
 	</main>
 
