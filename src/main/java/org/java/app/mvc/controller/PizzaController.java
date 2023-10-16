@@ -4,8 +4,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+import org.java.app.db.pojo.Ingredient;
 import org.java.app.db.pojo.Pizza;
 import org.java.app.db.pojo.SpecialOffer;
+import org.java.app.db.serv.IngredientService;
 import org.java.app.db.serv.PizzaService;
 import org.java.app.db.serv.SpecialOfferService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +40,9 @@ public class PizzaController {
 
   @Autowired
   private SpecialOfferService specialOfferService;
+
+  @Autowired
+  private IngredientService ingredientService;
 
   // @GetMapping("/")
   @GetMapping
@@ -109,7 +114,10 @@ public class PizzaController {
   @GetMapping("/pizza-create")
   public String getCreateForm(Model model){
     
+    List<Ingredient> ingredients = ingredientService.findAll();
+
     model.addAttribute("pizza", new Pizza());
+    model.addAttribute("ingredients", ingredients);
 
     return "pizza-create";
   }
@@ -150,8 +158,11 @@ public class PizzaController {
   public String getPizzaUpdate(@PathVariable int id, Model model){
 
     Pizza pizza = pizzaService.findById(id);
-		model.addAttribute("pizza", pizza);
+    List<Ingredient> ingredients = ingredientService.findAll();
 
+		model.addAttribute("pizza", pizza);
+    model.addAttribute("ingredients", ingredients);
+    
     return "pizza-update";
   }
   // * EDIT - STEP 3 - aggiungere il post mapping 

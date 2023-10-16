@@ -44,6 +44,14 @@
 			</li>
 		</ul>
 
+		<!-- Ingredienti -->
+		<h3 th:if="*{ingredients.size() > 0}"><span>Ingredients</span></h3>
+		<ul th:if="*{ingredients.size() > 0}" class="list-unstyled mt-2">
+			<li th:each="ingredient : *{ingredients}" th:object="${ingredient}" class="my-1 d-flex justify-content-between align-items-center">
+				<span class="text-white fw-custom me-2">[[*{nameWithInitialCapital}]]</span>
+			</li>
+		</ul>
+
 	</main>
 	
 	<!-- link di tutte le pagine -->

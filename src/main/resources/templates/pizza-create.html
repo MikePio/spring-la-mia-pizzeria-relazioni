@@ -66,6 +66,15 @@
           </div>
         </div>
 
+        <div class="mb-3 text-start">
+          <span class="text-white">Ingredients</span>
+          <div class="mt-2"></div>
+          <div th:each="ingredient : ${ingredients}" th:object="${ingredient}">
+            <input type="checkbox" th:id="${'ingredient-' + ingredient.id}" th:value="*{id}" th:field="${pizza.ingredients}" placeholder="Ingredient">
+            <label th:for="${'ingredient-' + ingredient.id}" class="form-label">[[*{nameWithInitialCapital}]]</label>
+          </div>
+        </div>
+
         <!-- * tutti gli errori -->
         <!-- <div th:each="err : ${#fields.allErrors()}" th:text="${err}" class="text-danger my-2 text-start"></div> -->
 
